@@ -18,6 +18,9 @@ especialista que atiende en el Cisco 9861.
 5. El usuario presiona **Llamar**.
 6. El 9811 llama a la extensión configurada para el Cisco 9861.
 
+El servicio utiliza el URI compacto \`Dial:<extension>\`. Después de presionar
+**Llamar**, el teléfono cambia a su interfaz nativa de llamada.
+
 Los textos están abreviados deliberadamente para la pantalla pequeña del 9811.
 La interfaz utiliza el menú nativo del teléfono y evita párrafos, imágenes
 pesadas y desplazamiento innecesario.

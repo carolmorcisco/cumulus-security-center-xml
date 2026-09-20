@@ -82,8 +82,9 @@ def incident_confirmation(incident_key: str, environ: dict) -> str | None:
     extension = specialist_extension()
     base_url = public_base_url(environ)
 
-    # useAppUI=1 keeps this compact XML screen visible as the call begins.
-    dial_uri = f"Dial:{extension}:1:Cumulus/SecurityCenter:1"
+    # Use the simplest Dial URI for maximum compatibility with Webex Calling.
+    # The phone changes to its native call screen after the user presses Llamar.
+    dial_uri = f"Dial:{extension}"
     text = (
         f"{incident['menu']}\n"
         f"Equipo: {incident['team']}\n"

@@ -53,7 +53,8 @@ class CumulusSecurityCenterTests(unittest.TestCase):
                 os.environ["SPECIALIST_EXTENSION"] = old_value
         self.assertEqual(status, "200 OK")
         self.assertIn("<CiscoIPPhoneText>", body)
-        self.assertIn("Dial:9861:1:Cumulus/SecurityCenter:1", body)
+        self.assertIn("Dial:9861", body)
+        self.assertNotIn("Cumulus/SecurityCenter", body)
         self.assertIn("Llamar", body)
 
     def test_unknown_incident_returns_phone_error(self):
