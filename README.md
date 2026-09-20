@@ -13,8 +13,8 @@ puede conectar la llamada con el especialista que atiende en el Cisco 9861.
    - Incidente caja.
    - Desembolso >50K.
    - Alerta oficina.
-4. El teléfono muestra **ALERTA DE EMERGENCIA**, la selección realizada y la
-   pregunta **¿Conectar ahora con especialista?**
+4. El teléfono muestra **ALERTA DE EMERGENCIA** y una frase claramente
+   separada, por ejemplo: **Posible fraude: Conectar con especialista?**
 5. El usuario presiona **Conectar**.
 6. El 9811 llama a la extensión configurada para el Cisco 9861.
 

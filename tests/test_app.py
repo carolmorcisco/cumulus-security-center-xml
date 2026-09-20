@@ -56,7 +56,7 @@ class CumulusSecurityCenterTests(unittest.TestCase):
         self.assertIn("Dial:9861", body)
         self.assertNotIn("Cumulus/SecurityCenter", body)
         self.assertIn("ALERTA DE EMERGENCIA", body)
-        self.assertIn("Conectar ahora con especialista?", body)
+        self.assertIn("Posible fraude: Conectar con especialista?", body)
         self.assertIn("Conectar", body)
         self.assertNotIn("Equipo:", body)
         self.assertNotIn("Ref:", body)

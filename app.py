@@ -76,7 +76,7 @@ def incident_confirmation(incident_key: str, environ: dict) -> str | None:
     # Use the simplest Dial URI for maximum compatibility with Webex Calling.
     # The phone changes to its native call screen after the user presses Conectar.
     dial_uri = f"Dial:{extension}"
-    text = f"{incident['menu']}\n\nConectar ahora con especialista?"
+    text = f"{incident['menu']}: Conectar con especialista?"
 
     return f"""<?xml version="1.0" encoding="utf-8"?>
 <CiscoIPPhoneText>
