@@ -1,16 +1,14 @@
 import json
 import os
-import secrets
-from datetime import datetime, timezone
 from html import escape
 from wsgiref.simple_server import make_server
 
 
 INCIDENTS = {
-    "fraude": {"menu": "Posible fraude", "team": "Fraude"},
-    "caja": {"menu": "Incidente caja", "team": "Operaciones"},
-    "desembolso": {"menu": "Desembolso >50K", "team": "Desembolsos"},
-    "oficina": {"menu": "Alerta oficina", "team": "Seguridad"},
+    "fraude": {"menu": "Posible fraude"},
+    "caja": {"menu": "Incidente caja"},
+    "desembolso": {"menu": "Desembolso >50K"},
+    "oficina": {"menu": "Alerta oficina"},
 }
 
 
@@ -31,12 +29,6 @@ def specialist_extension() -> str:
     return value
 
 
-def new_reference() -> str:
-    date = datetime.now(timezone.utc).strftime("%m%d")
-    suffix = secrets.randbelow(900) + 100
-    return f"CF-{date}-{suffix}"
-
-
 def security_menu(environ: dict) -> str:
     base_url = public_base_url(environ)
     menu_items = "\n".join(
@@ -48,8 +40,8 @@ def security_menu(environ: dict) -> str:
     )
     return f"""<?xml version="1.0" encoding="utf-8"?>
 <CiscoIPPhoneMenu>
-  <Title>Cumulus Security</Title>
-  <Prompt>Seleccione una opcion</Prompt>
+  <Title>Cumulus Emergencias</Title>
+  <Prompt>Seleccione la emergencia</Prompt>
 {menu_items}
 </CiscoIPPhoneMenu>"""
 
@@ -78,27 +70,21 @@ def incident_confirmation(incident_key: str, environ: dict) -> str | None:
     if incident is None:
         return None
 
-    reference = new_reference()
     extension = specialist_extension()
     base_url = public_base_url(environ)
 
     # Use the simplest Dial URI for maximum compatibility with Webex Calling.
-    # The phone changes to its native call screen after the user presses Llamar.
+    # The phone changes to its native call screen after the user presses Conectar.
     dial_uri = f"Dial:{extension}"
-    text = (
-        f"{incident['menu']}\n"
-        f"Equipo: {incident['team']}\n"
-        f"Ref: {reference}\n\n"
-        "Conectar con especialista?"
-    )
+    text = f"{incident['menu']}\n\nConectar ahora con especialista?"
 
     return f"""<?xml version="1.0" encoding="utf-8"?>
 <CiscoIPPhoneText>
-  <Title>Alerta preparada</Title>
-  <Prompt>Seleccione Llamar</Prompt>
+  <Title>ALERTA DE EMERGENCIA</Title>
+  <Prompt>Asistencia inmediata</Prompt>
   <Text>{escape(text)}</Text>
   <SoftKeyItem>
-    <Name>Llamar</Name>
+    <Name>Conectar</Name>
     <URL>{escape(dial_uri)}</URL>
     <Position>1</Position>
   </SoftKeyItem>
@@ -153,8 +139,8 @@ def browser_preview() -> str:
   <main>
     <section class="phone" aria-label="Vista simulada de la pantalla pequeña del Cisco 9811">
       <div class="screen">
-        <div class="brand"><small>CUMULUS FINANCE</small><h1>Security Center</h1></div>
-        <div class="prompt">Seleccione una opción</div>
+        <div class="brand"><small>CUMULUS FINANCE</small><h1>Emergencias</h1></div>
+        <div class="prompt">Seleccione la emergencia</div>
         <div class="menu">{items}</div>
         <div class="keys"><span>Seleccionar</span><span>Salir</span></div>
       </div>

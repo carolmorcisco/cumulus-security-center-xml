@@ -1,25 +1,26 @@
 # Cumulus Security Center para Cisco 9811
 
-Servicio XML para que el botón de acción del Cisco Desk Phone 9811 abra una
-experiencia visual de seguridad financiera. El usuario selecciona el tipo de
-incidente, recibe una referencia en pantalla y puede conectar la llamada con el
-especialista que atiende en el Cisco 9861.
+Servicio XML para que el botón de emergencia del Cisco Desk Phone 9811 abra una
+experiencia visual de asistencia inmediata. El usuario selecciona la alerta y
+puede conectar la llamada con el especialista que atiende en el Cisco 9861.
 
 ## Flujo de demostración
 
 1. El usuario presiona el botón rojo del Cisco 9811.
-2. El teléfono abre **Cumulus Security Center**.
+2. El teléfono abre **Cumulus Emergencias**.
 3. El usuario selecciona una de estas opciones:
    - Posible fraude.
    - Incidente caja.
    - Desembolso >50K.
    - Alerta oficina.
-4. El teléfono muestra una confirmación compacta con equipo y referencia.
-5. El usuario presiona **Llamar**.
+4. El teléfono muestra **ALERTA DE EMERGENCIA**, la selección realizada y la
+   pregunta **¿Conectar ahora con especialista?**
+5. El usuario presiona **Conectar**.
 6. El 9811 llama a la extensión configurada para el Cisco 9861.
 
 El servicio utiliza el URI compacto \`Dial:<extension>\`. Después de presionar
-**Llamar**, el teléfono cambia a su interfaz nativa de llamada.
+**Conectar**, el teléfono cambia a su interfaz nativa de llamada. No se generan
+códigos de referencia ni se muestran nombres de equipos.
 
 Los textos están abreviados deliberadamente para la pantalla pequeña del 9811.
 La interfaz utiliza el menú nativo del teléfono y evita párrafos, imágenes

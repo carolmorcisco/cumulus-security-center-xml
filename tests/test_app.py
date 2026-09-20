@@ -34,7 +34,7 @@ class CumulusSecurityCenterTests(unittest.TestCase):
         self.assertEqual(status, "200 OK")
         self.assertTrue(headers["Content-Type"].startswith("text/xml"))
         self.assertIn("<CiscoIPPhoneMenu>", body)
-        self.assertIn("Cumulus Security", body)
+        self.assertIn("Cumulus Emergencias", body)
         self.assertEqual(body.count("<MenuItem>"), 4)
         self.assertIn("Posible fraude", body)
         self.assertIn("Incidente caja", body)
@@ -55,7 +55,12 @@ class CumulusSecurityCenterTests(unittest.TestCase):
         self.assertIn("<CiscoIPPhoneText>", body)
         self.assertIn("Dial:9861", body)
         self.assertNotIn("Cumulus/SecurityCenter", body)
-        self.assertIn("Llamar", body)
+        self.assertIn("ALERTA DE EMERGENCIA", body)
+        self.assertIn("Conectar ahora con especialista?", body)
+        self.assertIn("Conectar", body)
+        self.assertNotIn("Equipo:", body)
+        self.assertNotIn("Ref:", body)
+        self.assertNotIn("CF-", body)
 
     def test_unknown_incident_returns_phone_error(self):
         status, _, body = call_app("/incident/no-existe")
